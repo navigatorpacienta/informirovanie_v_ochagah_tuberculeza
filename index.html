@@ -822,7 +822,7 @@
             <p style="margin-top: 15px; font-weight: bold;">Ответственное отношение к обследованию — вклад в здоровье всего коллектива!</p>
         </div>
         
-        <div class="footer">
+                <div class="footer">
             <p>Информационный материал об обязательном обследовании на туберкулёз в коллективах.</p>
             <p>Все изображения являются учебными материалами, текст адаптирован для коллективов учреждений</p>
             <p style="margin-top: 15px; color: #95a5a6; font-size: 14px;">Автор и разработчик: заведующий филиалом "Клинский" ГБУЗ МО МОКПТД Лукаш И.А.</p>
@@ -870,59 +870,6 @@
             if (event.key === 'Escape') {
                 closeModal();
             }
-        });
-        
-        // Скрипт для улучшения печати
-        document.addEventListener('DOMContentLoaded', function() {
-            // Добавляем специальные стили для печати
-            const printStyles = document.createElement('style');
-            printStyles.innerHTML = `
-                @media print {
-                    body {
-                        font-size: 12pt !important;
-                        line-height: 1.5 !important;
-                    }
-                    
-                    .article-container {
-                        padding: 15px !important;
-                        margin: 0 !important;
-                        box-shadow: none !important;
-                        border-radius: 0 !important;
-                    }
-                    
-                    .image-container, .figure-item {
-                        margin: 20px 0 !important;
-                        page-break-inside: avoid !important;
-                        break-inside: avoid !important;
-                    }
-                    
-                    img {
-                        max-width: 100% !important;
-                        height: auto !important;
-                    }
-                    
-                    .highlight-box, .info-box, .question-box, .conclusion {
-                        page-break-inside: avoid !important;
-                    }
-                    
-                    h1, h2, h3 {
-                        page-break-after: avoid !important;
-                    }
-                    
-                    .click-hint {
-                        display: none !important;
-                    }
-                }
-            `;
-            document.head.appendChild(printStyles);
-            
-            // Добавляем нумерацию страниц при печати
-            window.addEventListener('beforeprint', function() {
-                const pageNumbers = document.createElement('div');
-                pageNumbers.id = 'page-numbers';
-                pageNumbers.style.cssText = 'position: fixed; bottom: 10px; right: 20px; font-size: 12px; color: #666;';
-                document.body.appendChild(pageNumbers);
-            });
         });
     </script>
 </body>
