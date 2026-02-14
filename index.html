@@ -555,61 +555,6 @@
             display: block;
             margin-top: 10px;
         }
-        
-        /* Стили для блока скачивания */
-        .download-block {
-            background: linear-gradient(145deg, #f0f7ff, #e6f0fa);
-            border-radius: 24px;
-            padding: 35px 40px;
-            margin: 45px 0 30px;
-            border: 1px solid #cde4f5;
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.15);
-            text-align: center;
-        }
-        
-        .download-text {
-            font-size: 20px;
-            color: #1a3b4f;
-            margin-bottom: 25px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-        
-        .download-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: #2c3e50;
-            color: white;
-            padding: 18px 42px;
-            border-radius: 60px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 20px;
-            box-shadow: 0 10px 20px rgba(44, 62, 80, 0.3);
-            transition: all 0.2s ease;
-            border: 1px solid #1e2b38;
-            margin-bottom: 10px;
-        }
-        
-        .download-button:hover {
-            background: #1e2b38;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(44, 62, 80, 0.4);
-        }
-        
-        .download-button i {
-            font-size: 24px;
-        }
-        
-        .pdf-note {
-            font-size: 16px;
-            color: #4a6f8c;
-            margin-top: 15px;
-        }
     </style>
 </head>
 <body>
@@ -799,10 +744,8 @@
             
             <p>Если у вас остались вопросы, обратитесь к врачу.</p>
         </div>
-        
-                </div> <!-- closing content-section -->
-        
-        <!-- БЛОК СКАЧИВАНИЯ ОБЪЯВЛЕНИЯ -->
+
+        <!-- ДОБАВЛЕННЫЙ БЛОК С КНОПКОЙ -->
         <div style="background: linear-gradient(145deg, #f0f7ff, #e6f0fa); border-radius: 24px; padding: 30px 35px; margin: 45px 0 30px; border: 1px solid #cde4f5; box-shadow: 0 15px 30px rgba(52, 152, 219, 0.15); text-align: center;">
             <div style="font-size: 18px; color: #1a3b4f; margin-bottom: 25px; line-height: 1.5; font-weight: 500;">
                 <strong>Распечатайте объявление, передайте руководству в производственном очаге для размещения на стенде.</strong><br>
@@ -822,12 +765,12 @@
             <p style="margin-top: 15px; font-weight: bold;">Ответственное отношение к обследованию — вклад в здоровье всего коллектива!</p>
         </div>
         
-                <div class="footer">
+        <div class="footer">
             <p>Информационный материал об обязательном обследовании на туберкулёз в коллективах.</p>
             <p>Все изображения являются учебными материалами, текст адаптирован для коллективов учреждений</p>
             <p style="margin-top: 15px; color: #95a5a6; font-size: 14px;">Автор и разработчик: заведующий филиалом "Клинский" ГБУЗ МО МОКПТД Лукаш И.А.</p>
         </div>
-    </div> <!-- закрывающий div для article-container -->
+    </div>
     
     <!-- Модальное окно для увеличения изображений -->
     <div id="imageModal" class="modal">
@@ -870,6 +813,59 @@
             if (event.key === 'Escape') {
                 closeModal();
             }
+        });
+        
+        // Скрипт для улучшения печати
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем специальные стили для печати
+            const printStyles = document.createElement('style');
+            printStyles.innerHTML = `
+                @media print {
+                    body {
+                        font-size: 12pt !important;
+                        line-height: 1.5 !important;
+                    }
+                    
+                    .article-container {
+                        padding: 15px !important;
+                        margin: 0 !important;
+                        box-shadow: none !important;
+                        border-radius: 0 !important;
+                    }
+                    
+                    .image-container, .figure-item {
+                        margin: 20px 0 !important;
+                        page-break-inside: avoid !important;
+                        break-inside: avoid !important;
+                    }
+                    
+                    img {
+                        max-width: 100% !important;
+                        height: auto !important;
+                    }
+                    
+                    .highlight-box, .info-box, .question-box, .conclusion {
+                        page-break-inside: avoid !important;
+                    }
+                    
+                    h1, h2, h3 {
+                        page-break-after: avoid !important;
+                    }
+                    
+                    .click-hint {
+                        display: none !important;
+                    }
+                }
+            `;
+            document.head.appendChild(printStyles);
+            
+            // Добавляем нумерацию страниц при печати
+            window.addEventListener('beforeprint', function() {
+                const pageNumbers = document.createElement('div');
+                pageNumbers.id = 'page-numbers';
+                pageNumbers.style.cssText = 'position: fixed; bottom: 10px; right: 20px; font-size: 12px; color: #666;';
+                document.body.appendChild(pageNumbers);
+            });
         });
     </script>
 </body>
